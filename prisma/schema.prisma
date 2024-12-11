@@ -19,6 +19,8 @@ model Developer {
   instagram String
   about String
 
+  games Game[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -29,6 +31,12 @@ model Game {
   id String @id @default(uuid())
   name String
   description String
+  xbox String
+  psn String
+  nintendo String
+  steam String
+
+  developers Developer[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
