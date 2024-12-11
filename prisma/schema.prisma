@@ -11,13 +11,13 @@ datasource db {
 }
 
 model Developer {
-  id String @id @default(uuid())
-  name String
-  email String
-  website String
-  twitter String
+  id        String @id @default(uuid())
+  name      String
+  email     String
+  website   String
+  twitter   String
   instagram String
-  about String
+  about     String
 
   games Game[]
 
@@ -28,13 +28,14 @@ model Developer {
 }
 
 model Game {
-  id String @id @default(uuid())
-  name String
+  id          String @id @default(uuid())
+  name        String
   description String
-  xbox String
-  psn String
-  nintendo String
-  steam String
+  xbox        String
+  psn         String
+  nintendo    String
+  steam       String
+  bannerUrl   String
 
   developers Developer[]
 
