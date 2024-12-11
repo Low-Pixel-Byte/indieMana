@@ -36,6 +36,8 @@ model Game {
   nintendo    String
   steam       String
   bannerUrl   String
+  discord     String
+  
 
   developers Developer[]
 
