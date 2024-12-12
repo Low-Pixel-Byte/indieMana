@@ -19,4 +19,5 @@ export type GameCreate = {
   nintendo?: String;
   steam?: String;
   discord?: String;
+  developerId: string;
 };

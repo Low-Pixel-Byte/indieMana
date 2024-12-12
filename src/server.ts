@@ -1,10 +1,15 @@
 import fastify from "fastify";
 import { DeveloperRoute } from "./routes/DeveloperRoute";
+import { GameRoute } from "./routes/gameRoute";
 
 const app = fastify();
 
 app.register(DeveloperRoute, {
   prefix: "/developers",
+});
+
+app.register(GameRoute, {
+  prefix: "/games",
 });
 
 app.listen(
