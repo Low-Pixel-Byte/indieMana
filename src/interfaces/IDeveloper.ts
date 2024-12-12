@@ -1,8 +1,5 @@
-export interface IDeveloperCreate {
-  name: string;
-  email?: string;
-  website?: string;
-  twitter?: string;
-  instagram?: string;
-  about?: string;
+import { Developer, DeveloperCreate } from "../@types/typesDeveloper";
+
+export interface IDeveloper {
+  create(developer: DeveloperCreate): Promise<Developer>;
 }
