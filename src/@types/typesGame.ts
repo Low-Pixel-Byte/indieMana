@@ -1,3 +1,5 @@
+import { Developer } from "./typesDeveloper";
+
 export type Game = {
   id: string;
   name: string;
@@ -8,6 +10,7 @@ export type Game = {
   nintendo: String;
   steam: String;
   discord: String;
+  developer: Developer[];
 };
 
 export type GameCreate = {

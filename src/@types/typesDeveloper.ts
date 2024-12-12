@@ -1,3 +1,5 @@
+import { Game } from "./typesGame";
+
 export type Developer = {
   id: string;
   name: string;
@@ -6,6 +8,7 @@ export type Developer = {
   twitter: string;
   instagram: string;
   about: string;
+  games: Game[];
 };
 
 export type DeveloperCreate = {
