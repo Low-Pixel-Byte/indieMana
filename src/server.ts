@@ -1,9 +1,10 @@
 import fastify from "fastify";
+import { DeveloperRoute } from "./routes/DeveloperRoute";
 
 const app = fastify();
 
-app.get("/", async () => {
-  return { hello: "world" };
+app.register(DeveloperRoute, {
+  prefix: "/developers",
 });
 
 app.listen(
