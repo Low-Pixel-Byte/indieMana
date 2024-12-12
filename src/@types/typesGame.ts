@@ -10,7 +10,7 @@ export type Game = {
   nintendo: String;
   steam: String;
   discord: String;
-  developer: Developer[];
+  developer?: Developer[];
 };
 
 export type GameCreate = {

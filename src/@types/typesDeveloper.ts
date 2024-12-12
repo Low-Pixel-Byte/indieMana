@@ -8,7 +8,7 @@ export type Developer = {
   twitter: string;
   instagram: string;
   about: string;
-  games: Game[];
+  games?: Game[];
 };
 
 export type DeveloperCreate = {
