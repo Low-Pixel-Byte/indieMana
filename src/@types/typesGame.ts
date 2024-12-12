@@ -9,3 +9,14 @@ export type Game = {
   steam: String;
   discord: String;
 };
+
+export type GameCreate = {
+  name: string;
+  bannerUrl?: string;
+  description?: String;
+  xbox?: String;
+  psn?: String;
+  nintendo?: String;
+  steam?: String;
+  discord?: String;
+};
