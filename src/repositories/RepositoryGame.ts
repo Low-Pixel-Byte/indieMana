@@ -24,4 +24,13 @@ export class RepositoryGame implements IGame {
 
     return newGame;
   }
+
+  async findAll(): Promise<Game[]> {
+    const games = await prisma.game.findMany({
+      include: {
+        developers: true,
+      },
+    });
+    return games;
+  }
 }

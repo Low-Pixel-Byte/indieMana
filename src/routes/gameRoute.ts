@@ -36,4 +36,15 @@ export async function GameRoute(fastify: FastifyInstance) {
       return reply.status(500).send({ message: error });
     }
   });
+
+  fastify.get("/", async (request, reply) => {
+    const gameUseCase = new GameUseCase();
+    try {
+      const games = await gameUseCase.findAll();
+      return reply.status(200).send(games);
+    } catch (error) {
+      console.log(error);
+      return reply.status(500).send({ message: error });
+    }
+  });
 }

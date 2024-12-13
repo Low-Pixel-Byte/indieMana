@@ -31,4 +31,9 @@ export class GameUseCase {
     });
     return newGame;
   }
+
+  async findAll(): Promise<Game[]> {
+    const games = await this.repository.findAll();
+    return games;
+  }
 }
