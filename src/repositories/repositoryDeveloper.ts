@@ -17,6 +17,16 @@ class RepositoryDeveloper implements IDeveloper {
 
     return newDeveloper;
   }
+
+  async findById(developerId: string): Promise<Developer | null> {
+    const developer = await prisma.developer.findUnique({
+      where: {
+        id: developerId,
+      },
+    });
+
+    return developer;
+  }
 }
 
 export { RepositoryDeveloper };

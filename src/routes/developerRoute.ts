@@ -23,4 +23,19 @@ export async function DeveloperRoute(fastify: FastifyInstance) {
       return reply.status(500).send({ message: error });
     }
   });
+
+  fastify.get<{ Params: { developerId: string } }>(
+    "/:developerId",
+    async (request, reply) => {
+      const developerUseCase = new DeveloperUseCase();
+      try {
+        const { developerId } = request.params;
+        const developer = await developerUseCase.findById(developerId);
+        return reply.status(200).send(developer);
+      } catch (error) {
+        console.log(error);
+        return reply.status(500).send({ message: error });
+      }
+    }
+  );
 }

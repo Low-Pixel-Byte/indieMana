@@ -25,4 +25,9 @@ export class DeveloperUseCase {
     });
     return developer;
   }
+
+  async findById(developerId: string): Promise<Developer | null> {
+    const developer = await this.repository.findById(developerId);
+    return developer;
+  }
 }
