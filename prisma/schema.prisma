@@ -28,15 +28,19 @@ model Developer {
 }
 
 model Game {
-  id          String @id @default(uuid())
-  name        String
-  description String
-  xbox        String
-  psn         String
-  nintendo    String
-  steam       String
-  bannerUrl   String
-  discord     String
+  id            Int      @id @default(autoincrement())
+  name          String
+  description   String
+  xboxUrl       String
+  googlePlayUrl String
+  psnUrl        String
+  nintendoUrl   String
+  steamUrl      String
+  bannerUrl     String
+  discord       String
+  dateRelease   DateTime
+  trailerUrl    String
+  achivents     Boolean
 
   Categorys  Category[]
   developers Developer[]
@@ -48,7 +52,12 @@ model Game {
 }
 
 model Category {
-  id    String @id @default(uuid())
+  id    Int    @id @default(autoincrement())
   name  String
   games Game[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("categories")
 }
