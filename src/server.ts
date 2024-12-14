@@ -1,6 +1,7 @@
 import fastify from "fastify";
-import { DeveloperRoute } from "./routes/DeveloperRoute";
+import { DeveloperRoute } from "./routes/developerRoute";
 import { GameRoute } from "./routes/gameRoute";
+import { CategoryRoute } from "./routes/categoryRoute";
 
 const app = fastify();
 
@@ -10,6 +11,10 @@ app.register(DeveloperRoute, {
 
 app.register(GameRoute, {
   prefix: "/games",
+});
+
+app.register(CategoryRoute, {
+  prefix: "/categories",
 });
 
 app.listen(
