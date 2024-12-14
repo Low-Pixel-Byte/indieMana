@@ -11,4 +11,9 @@ export class CategoryUseCase {
     const category = await this.repository.create({ name });
     return category;
   }
+
+  async findAll(): Promise<Category[]> {
+    const categories = await this.repository.findAll();
+    return categories;
+  }
 }

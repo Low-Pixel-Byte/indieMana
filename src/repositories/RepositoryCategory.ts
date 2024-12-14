@@ -12,4 +12,8 @@ export class RepositoryCategory implements ICategory {
 
     return newCategory;
   }
+
+  findAll(): Promise<Category[]> {
+    const categories = prisma.category.findMany();
+    return categories;
 }

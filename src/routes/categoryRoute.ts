@@ -30,4 +30,15 @@ export async function CategoryRoute(fastify: FastifyInstance) {
       return reply.status(500).send({ message: error });
     }
   });
+
+  fastify.get("/", async (request, reply) => {
+    const categoryUseCase = new CategoryUseCase();
+    try {
+      const categories = await categoryUseCase.findAll();
+      return reply.status(200).send(categories);
+    } catch (error) {
+      console.log(error);
+      return reply.status(500).send({ message: error });
+    }
+  });
 }
