@@ -1,26 +1,37 @@
+import { Category } from "@prisma/client";
 import { Developer } from "./typesDeveloper";
 
 export type Game = {
-  id: string;
+  id: number;
   name: string;
-  bannerUrl: string;
   description: String;
-  xbox: String;
-  psn: String;
-  nintendo: String;
-  steam: String;
-  discord: String;
-  developer?: Developer[];
+  xboxUrl?: String;
+  googlePlayUrl?: String;
+  psnUrl?: String;
+  nintendoUrl?: String;
+  steamUrl?: String;
+  bannerUrl: String;
+  discord?: String;
+  dateRelease: Date;
+  trailerUrl: String;
+  achivents: Boolean;
+  developers: Developer[];
+  categories: Category[];
 };
 
 export type GameCreate = {
   name: string;
-  bannerUrl?: string;
-  description?: String;
-  xbox?: String;
-  psn?: String;
-  nintendo?: String;
-  steam?: String;
+  description: String;
+  xboxUrl?: String;
+  googlePlayUrl?: String;
+  psnUrl?: String;
+  nintendoUrl?: String;
+  steamUrl?: String;
+  bannerUrl: String;
   discord?: String;
-  developerId: string;
+  dateRelease: Date;
+  trailerUrl?: String;
+  achivents: Boolean;
+  developers: Developer[];
+  categories: Category[];
 };
