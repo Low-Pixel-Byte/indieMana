@@ -37,12 +37,18 @@ model Game {
   steam       String
   bannerUrl   String
   discord     String
-  
 
+  Categorys  Category[]
   developers Developer[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("games")
+}
+
+model Category {
+  id    String @id @default(uuid())
+  name  String
+  games Game[]
 }
