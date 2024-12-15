@@ -1,9 +1,13 @@
 import fastify from "fastify";
+import cors from "@fastify/cors";
 import { DeveloperRoute } from "./routes/developerRoute";
 import { GameRoute } from "./routes/gameRoute";
 import { CategoryRoute } from "./routes/categoryRoute";
+import { env } from "./env";
 
 const app = fastify();
+
+app.register(cors);
 
 app.register(DeveloperRoute, {
   prefix: "/developers",
@@ -17,11 +21,10 @@ app.register(CategoryRoute, {
   prefix: "/categories",
 });
 
-app.listen(
-  {
-    port: 3333,
-  },
-  () => {
-    console.log("HTTP server running on http://localhost:3333");
+app.listen({ port: env.PORT }, (err) => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
   }
-);
+  console.log(`Server listening at http://localhost:${env.PORT}`);
+});
