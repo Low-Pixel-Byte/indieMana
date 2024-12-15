@@ -32,6 +32,14 @@ export type GameCreate = {
   dateRelease: Date;
   trailerUrl?: string;
   achivents: boolean;
-  developers: string[];
-  categories: number[];
+  developers: DeveloperID[];
+  categories: CategoryID[];
+};
+
+type DeveloperID = {
+  id: string;
+};
+
+type CategoryID = {
+  id: number;
 };
