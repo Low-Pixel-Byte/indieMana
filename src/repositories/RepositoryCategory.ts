@@ -19,7 +19,10 @@ export class RepositoryCategory implements ICategory {
   }
 
   findById(id: number): Promise<Category | null> {
-    const category = prisma.category.findUnique({ where: { id } });
+    const category = prisma.category.findUnique({
+      where: { id },
+      include: { games: true },
+    });
     return category;
   }
 }
