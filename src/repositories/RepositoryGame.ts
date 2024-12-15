@@ -38,6 +38,7 @@ export class RepositoryGame implements IGame {
     const games = await prisma.game.findMany({
       include: {
         developers: true,
+        Categorys: true,
       },
     });
     return games;
