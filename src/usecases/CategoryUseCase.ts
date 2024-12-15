@@ -16,4 +16,9 @@ export class CategoryUseCase {
     const categories = await this.repository.findAll();
     return categories;
   }
+
+  async findById(id: number): Promise<Category | null> {
+    const category = await this.repository.findById(id);
+    return category;
+  }
 }

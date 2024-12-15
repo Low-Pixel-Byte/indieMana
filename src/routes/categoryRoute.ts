@@ -41,4 +41,19 @@ export async function CategoryRoute(fastify: FastifyInstance) {
       return reply.status(500).send({ message: error });
     }
   });
+
+  fastify.get<{ Params: { categoryId: string } }>(
+    "/:categoryId",
+    async (request, reply) => {
+      const categoryUseCase = new CategoryUseCase();
+      try {
+        const { categoryId } = request.params;
+        const category = await categoryUseCase.findById(parseInt(categoryId));
+        return reply.status(200).send(category);
+      } catch (error) {
+        console.log(error);
+        return reply.status(500).send({ message: error });
+      }
+    }
+  );
 }
