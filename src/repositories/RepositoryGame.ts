@@ -7,17 +7,26 @@ export class RepositoryGame implements IGame {
     const newGame = await prisma.game.create({
       data: {
         name: game.name,
-        bannerUrl: game.bannerUrl || "",
-        description: game.description || "",
-        xbox: game.xbox || "",
-        psn: game.psn || "",
-        nintendo: game.nintendo || "",
-        steam: game.steam || "",
+        description: game.description,
+        xboxUrl: game.xboxUrl || "",
+        googlePlayUrl: game.googlePlayUrl || "",
+        psnUrl: game.psnUrl || "",
+        nintendoUrl: game.nintendoUrl || "",
+        steamUrl: game.steamUrl || "",
+        bannerUrl: game.bannerUrl,
         discord: game.discord || "",
+        dateRelease: game.dateRelease,
+        trailerUrl: game.trailerUrl || "",
+        achivents: game.achivents,
         developers: {
-          connect: {
-            id: game.developerId,
-          },
+          connect: game.developers.map((developer) => ({
+            id: developer.id,
+          })),
+        },
+        Categorys: {
+          connect: game.categories.map((category) => ({
+            id: category.id,
+          })),
         },
       },
     });

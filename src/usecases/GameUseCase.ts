@@ -9,25 +9,35 @@ export class GameUseCase {
 
   async create({
     name,
-    bannerUrl,
-    description,
-    xbox,
-    psn,
-    nintendo,
-    steam,
-    discord,
-    developerId,
+        description,
+        xboxUrl,
+        googlePlayUrl,
+        psnUrl,
+        nintendoUrl,
+        steamUrl,
+        bannerUrl,
+        discord,
+        dateRelease,
+        trailerUrl,
+        achivents,
+        developers,
+        categories
   }: GameCreate): Promise<Game> {
     const newGame = await this.repository.create({
       name,
-      bannerUrl,
-      description,
-      xbox,
-      psn,
-      nintendo,
-      steam,
-      discord,
-      developerId,
+        description,
+        xboxUrl,
+        googlePlayUrl,
+        psnUrl,
+        nintendoUrl,
+        steamUrl,
+        bannerUrl,
+        discord,
+        dateRelease,
+        trailerUrl,
+        achivents,
+        developers,
+        categories
     });
     return newGame;
   }

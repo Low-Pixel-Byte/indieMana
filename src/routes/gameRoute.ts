@@ -8,26 +8,36 @@ export async function GameRoute(fastify: FastifyInstance) {
     try {
       const {
         name,
-        bannerUrl,
         description,
-        xbox,
-        psn,
-        nintendo,
-        steam,
+        xboxUrl,
+        googlePlayUrl,
+        psnUrl,
+        nintendoUrl,
+        steamUrl,
+        bannerUrl,
         discord,
-        developerId,
+        dateRelease,
+        trailerUrl,
+        achivents,
+        developers,
+        categories,
       } = request.body;
 
       const game = await gameUseCase.create({
         name,
-        bannerUrl,
         description,
-        xbox,
-        psn,
-        nintendo,
-        steam,
+        xboxUrl,
+        googlePlayUrl,
+        psnUrl,
+        nintendoUrl,
+        steamUrl,
+        bannerUrl,
         discord,
-        developerId,
+        dateRelease,
+        trailerUrl,
+        achivents,
+        developers,
+        categories,
       });
 
       return reply.status(201).send(game);
