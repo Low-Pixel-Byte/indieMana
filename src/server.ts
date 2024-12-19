@@ -25,6 +25,10 @@ app.register(fastifySwaggerUi, {
   routePrefix: "/docs",
 });
 
+app.register(DeveloperRoute, {
+  prefix: "/developers",
+});
+
 app.register(GameRoute, {
   prefix: "/games",
 });
