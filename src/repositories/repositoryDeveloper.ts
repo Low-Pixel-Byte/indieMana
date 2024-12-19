@@ -23,6 +23,9 @@ class RepositoryDeveloper implements IDeveloper {
       where: {
         id: developerId,
       },
+      include: {
+        games: true,
+      },
     });
 
     return developer;
