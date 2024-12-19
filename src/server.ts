@@ -4,13 +4,25 @@ import { DeveloperRoute } from "./routes/developerRoute";
 import { GameRoute } from "./routes/gameRoute";
 import { CategoryRoute } from "./routes/categoryRoute";
 import { env } from "./env";
+import { fastifySwaggerUi } from "@fastify/swagger-ui";
+import { fastifySwagger } from "@fastify/swagger";
 
 const app = fastify();
 
 app.register(cors);
 
-app.register(DeveloperRoute, {
-  prefix: "/developers",
+app.register(fastifySwagger, {
+  openapi: {
+    info: {
+      title: "IndieBR Games API",
+      description: "API for IndieBR Games",
+      version: "1.0.0",
+    },
+  },
+});
+
+app.register(fastifySwaggerUi, {
+  routePrefix: "/docs",
 });
 
 app.register(GameRoute, {
