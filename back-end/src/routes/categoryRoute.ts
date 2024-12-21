@@ -24,7 +24,7 @@ export async function CategoryRoute(fastify: FastifyInstance) {
           201: {
             type: "object",
             properties: {
-              id: { type: "string" },
+              id: { type: "number" },
               name: { type: "string" },
             },
           },
