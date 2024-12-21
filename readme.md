@@ -1,6 +1,6 @@
-# IndieBR
+# IndieMana
 
-O IndieBR é uma plataforma digital inovadora dedicada à promoção e visibilidade de jogos indie desenvolvidos no Brasil. Seu objetivo principal é criar um espaço de destaque para os desenvolvedores brasileiros, permitindo que seus jogos alcancem um público global e promovendo a riqueza da indústria de games no Brasil.
+O IndieMana é uma plataforma digital inovadora dedicada à promoção e visibilidade de jogos indie desenvolvidos no Brasil. Seu objetivo principal é criar um espaço de destaque para os desenvolvedores brasileiros, permitindo que seus jogos alcancem um público global e promovendo a riqueza da indústria de games no Brasil.
 
 ## Contribuições
 
