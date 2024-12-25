@@ -6,6 +6,9 @@ export default function Home() {
     <>
       <Header />
       <main className="container mx-auto">
+        <h2 className="text-3xl font-bold mt-10 mb-4 text-lime-500">
+          Sugestões
+        </h2>
         <GameCard />
       </main>
     </>
