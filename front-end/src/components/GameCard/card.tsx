@@ -7,7 +7,7 @@ type CardProps = {
 
 export const Card = ({ info }: CardProps) => {
   return (
-    <div className="flex flex-col bg-slate-800 rounded-lg w-full">
+    <div className="flex flex-col bg-indigo-700 rounded-lg w-full">
       <Image
         width={380}
         height={100}
