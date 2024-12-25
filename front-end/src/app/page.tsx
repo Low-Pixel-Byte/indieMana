@@ -1,3 +1,11 @@
+import { GameCard } from "@/components/GameCard";
+
 export default function Home() {
-  return <></>;
+  return (
+    <>
+      <main className="">
+        <GameCard />
+      </main>
+    </>
+  );
 }
