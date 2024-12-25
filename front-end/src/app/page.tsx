@@ -1,9 +1,11 @@
 import { GameCard } from "@/components/GameCard";
+import Header from "@/components/Header";
 
 export default function Home() {
   return (
     <>
-      <main className="">
+      <Header />
+      <main className="container mx-auto">
         <GameCard />
       </main>
     </>
