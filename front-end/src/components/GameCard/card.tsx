@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { GameProps } from ".";
 import Image from "next/image";
 
@@ -7,7 +8,10 @@ type CardProps = {
 
 export const Card = ({ info }: CardProps) => {
   return (
-    <div className="flex flex-col bg-indigo-700 rounded-lg w-full">
+    <Link
+      href={`/games/${info.id}`}
+      className="flex flex-col bg-indigo-700 rounded-lg w-full"
+    >
       <Image
         width={380}
         height={100}
@@ -20,6 +24,6 @@ export const Card = ({ info }: CardProps) => {
       <div className="p-4">
         <span className="text-white font-bold">{info.name}</span>
       </div>
-    </div>
+    </Link>
   );
 };
