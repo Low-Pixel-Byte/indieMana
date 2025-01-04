@@ -19,11 +19,12 @@ type GameProps = {
     categories: Category[]; */
 };
 
-export function useGames() {
-  const [games, setGames] = useState<GameProps[]>([]);
+export function useGames(idGame?: number) {
+  const [games, setGames] = useState<GameProps[] | GameProps>([]);
 
   useEffect(() => {
     async function getData(id?: number) {
+      id = idGame;
       let data = await api.get("/games");
 
       if (id) {
@@ -33,7 +34,7 @@ export function useGames() {
     }
 
     getData();
-  }, []);
+  }, [idGame]);
 
   return { games };
 }
