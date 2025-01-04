@@ -43,4 +43,15 @@ export class RepositoryGame implements IGame {
     });
     return games;
   }
+
+  async findById(id: number): Promise<Game | null> {
+    const game = await prisma.game.findUnique({
+      where: { id },
+      include: {
+        developers: true,
+        Categorys: true,
+      },
+    });
+    return game;
+  }
 }
