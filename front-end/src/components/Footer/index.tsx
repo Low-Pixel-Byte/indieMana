@@ -1,10 +1,12 @@
+import Link from "next/link";
+
 export const Footer = () => {
   return (
     <footer className=" bg-indigo-700 text-white">
       <div className="container mx-auto">
-        <div className="grid grid-cols-3  ">
+        <div className="grid grid-cols-3">
           <div className="flex flex-col items-center border-r border-indigo-400">
-            <span className="font-bold text-white text-xl">IndieMana</span>
+            <span className="font-bold text-white text-xl my-8">IndieMana</span>
             <p>
               IndieMana é sua vitrine para explorar jogos indie incríveis de
               desenvolvedores ao redor do mundo. Descubra histórias únicas e
@@ -14,25 +16,35 @@ export const Footer = () => {
 
           <div className="flex flex-col gap-4 items-center justify-center border-r border-indigo-400">
             <div className="flex flex-col border-b border-indigo-400 w-full items-center justify-center">
-              <span className="font-bold text-white text-xl uppercase">
+              <span className="font-bold text-white text-xl uppercase  my-8">
                 navegação Rápida
               </span>
-              <nav className="">
+              <nav className="mb-8">
                 <ul className="flex  gap-2">
-                  <li>Sobre Nós</li>
-                  <li>Explorar Jogos</li>
-                  <li>Enviar Jogo</li>
-                  <li>Comunidade</li>
-                  <li>Suporte</li>
+                  <li className="underline">
+                    <Link href="/">Sobre Nós</Link>
+                  </li>
+                  <li className="underline">
+                    <Link href="/games">Explorar Jogos</Link>
+                  </li>
+                  <li className="underline">
+                    <Link href="/">Enviar Jogo</Link>
+                  </li>
+                  <li className="underline">
+                    <Link href="/">Comunidade</Link>
+                  </li>
+                  <li className="underline">
+                    <Link href="/">Suporte</Link>
+                  </li>
                 </ul>
               </nav>
             </div>
 
             <div className="flex flex-col w-full items-center justify-center">
-              <span className="font-bold text-white text-xl uppercase">
+              <span className="font-bold text-white text-xl uppercase my-8">
                 contato
               </span>
-              <div className="flex gap-2">
+              <div className="flex gap-2 mb-8">
                 <span>contato@indiemana.com</span>
                 <span>|</span>
                 <span>Suporte</span>
@@ -47,8 +59,9 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-around border-t border-indigo-400 py-8">
-        <div className="container mx-auto">
+
+      <div className="border-t border-indigo-400 py-8">
+        <div className="container mx-auto flex items-center justify-around">
           <span>© 2025 IndieMana. Todos os direitos reservados.</span>
           <span>Desenvolvido por: Bruno de Araujo e Gabriel Dutra.</span>
         </div>
