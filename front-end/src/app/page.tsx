@@ -8,9 +8,10 @@ export default function Home() {
       <Header />
       <main className="container mx-auto">
         <GameHighlight />
-        <h2 className="text-3xl font-bold mt-10 mb-4 text-lime-500">
-          Sugestões
-        </h2>
+        <div className="flex gap-2 h-10 w-full">
+          <div className="rounded-full bg-amber-600 w-1.5"></div>
+          <h2 className="text-3xl font-bold text-indigo-400">SUGESTÕES</h2>
+        </div>
         <GameCard />
       </main>
     </>

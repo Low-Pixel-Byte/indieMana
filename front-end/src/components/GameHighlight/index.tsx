@@ -12,8 +12,8 @@ export const GameHighlight = () => {
   }
 
   return (
-    <div className="flex bg-gray-900 text-white p-6 space-x-6">
-      <div className="flex-1 relative border-4 border-indigo-950 rounded-lg ">
+    <div className="flex bg-gray-900 text-white p-6 space-x-6 my-10">
+      <div className="flex-1 relative border-4 border-indigo-950 rounded-lg">
         <Image
           width={500}
           height={500}
@@ -31,7 +31,7 @@ export const GameHighlight = () => {
         {games.slice(1, 4).map((game, index) => (
           <div
             key={index}
-            className="relative rounded-lg overflow-hidden cursor-pointer border-4 border-indigo-950 rounded-lg"
+            className="relative rounded-lg overflow-hidden cursor-pointer border-4 border-indigo-800 rounded-lg"
           >
             <Image
               src={game.bannerUrl}
