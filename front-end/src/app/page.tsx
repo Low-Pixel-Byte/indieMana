@@ -1,3 +1,4 @@
+import { Footer } from "@/components/Footer";
 import { GameCard } from "@/components/GameCard";
 import { GameHighlight } from "@/components/GameHighlight";
 import Header from "@/components/Header";
@@ -14,6 +15,8 @@ export default function Home() {
         </div>
         <GameCard />
       </main>
+
+      <Footer />
     </>
   );
 }
