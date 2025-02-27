@@ -56,6 +56,14 @@ export const Footer = () => {
             <span className="font-bold text-white text-xl uppercase">
               redes sociais
             </span>
+            <div className="flex gap-4">
+              <a href="">
+                <img src={instagran} alt="" />
+              </a>
+              <a href=""></a>
+              <a href=""></a>
+              <a href=""></a>
+            </div>
           </div>
         </div>
       </div>
