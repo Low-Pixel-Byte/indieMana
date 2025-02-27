@@ -57,9 +57,7 @@ export const Footer = () => {
               redes sociais
             </span>
             <div className="flex gap-4">
-              <a href="">
-                <img src={instagran} alt="" />
-              </a>
+              <a href=""></a>
               <a href=""></a>
               <a href=""></a>
               <a href=""></a>
