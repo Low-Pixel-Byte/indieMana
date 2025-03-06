@@ -21,7 +21,8 @@ export const GameHighlight = () => {
           alt={"Banner do jogo " + games[0].name}
           className="rounded-lg w-full h-full object-cover"
         />
-        <div className="absolute bottom-4 left-4  px-4 py-2 rounded text-lg font-bold">
+        <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+        <div className="absolute bottom-4 left-4 px-4 py-2 rounded text-lg font-bold text-white">
           {games[0].name}
         </div>
       </div>
@@ -31,7 +32,7 @@ export const GameHighlight = () => {
         {games.slice(1, 4).map((game, index) => (
           <div
             key={index}
-            className="relative rounded-lg overflow-hidden cursor-pointer border-4 border-indigo-800 rounded-lg"
+            className="relative rounded-lg overflow-hidden cursor-pointer border-4 border-indigo-800"
           >
             <Image
               src={game.bannerUrl}
@@ -40,7 +41,8 @@ export const GameHighlight = () => {
               height={100}
               className="w-full h-36 object-cover transition-transform duration-300 hover:scale-110"
             />
-            <div className="absolute bottom-4 left-4 bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+            <div className="absolute bottom-4 left-4 flex items-center justify-center">
               <span className="text-lg font-bold">{game.name}</span>
             </div>
           </div>
