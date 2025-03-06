@@ -9,35 +9,35 @@ export class GameUseCase {
 
   async create({
     name,
-        description,
-        xboxUrl,
-        googlePlayUrl,
-        psnUrl,
-        nintendoUrl,
-        steamUrl,
-        bannerUrl,
-        discord,
-        dateRelease,
-        trailerUrl,
-        achivents,
-        developers,
-        categories
+    description,
+    xboxUrl,
+    googlePlayUrl,
+    psnUrl,
+    nintendoUrl,
+    steamUrl,
+    bannerUrl,
+    discord,
+    dateRelease,
+    trailerUrl,
+    achivents,
+    developers,
+    categories,
   }: GameCreate): Promise<Game> {
     const newGame = await this.repository.create({
       name,
-        description,
-        xboxUrl,
-        googlePlayUrl,
-        psnUrl,
-        nintendoUrl,
-        steamUrl,
-        bannerUrl,
-        discord,
-        dateRelease,
-        trailerUrl,
-        achivents,
-        developers,
-        categories
+      description,
+      xboxUrl,
+      googlePlayUrl,
+      psnUrl,
+      nintendoUrl,
+      steamUrl,
+      bannerUrl,
+      discord,
+      dateRelease,
+      trailerUrl,
+      achivents,
+      developers,
+      categories,
     });
     return newGame;
   }
@@ -45,5 +45,10 @@ export class GameUseCase {
   async findAll(): Promise<Game[]> {
     const games = await this.repository.findAll();
     return games;
+  }
+
+  async findById(id: number): Promise<Game | null> {
+    const game = await this.repository.findById(id);
+    return game;
   }
 }

@@ -174,4 +174,52 @@ export async function GameRoute(fastify: FastifyInstance) {
       }
     }
   );
+
+  fastify.get<{ Params: { id: number } }>(
+    "/:id",
+    {
+      schema: {
+        description: "Get a game by id",
+        tags: ["Game"],
+        params: {
+          type: "object",
+          properties: {
+            id: { type: "number" },
+          },
+          required: ["id"],
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              id: { type: "number" },
+              name: { type: "string" },
+              description: { type: "string" },
+              xboxUrl: { type: "string" },
+              googlePlayUrl: { type: "string" },
+              psnUrl: { type: "string" },
+              nintendoUrl: { type: "string" },
+              steamUrl: { type: "string" },
+              bannerUrl: { type: "string" },
+              discord: { type: "string" },
+              dateRelease: { type: "string" },
+              trailerUrl: { type: "string" },
+              achivents: { type: "boolean" },
+            },
+          },
+        },
+      },
+    },
+    async (request, reply) => {
+      const gameUseCase = new GameUseCase();
+      try {
+        const { id } = request.params;
+        const game = await gameUseCase.findById(id);
+        return reply.status(200).send(game);
+      } catch (error) {
+        console.log(error);
+        return reply.status(500).send({ message: error });
+      }
+    }
+  );
 }
