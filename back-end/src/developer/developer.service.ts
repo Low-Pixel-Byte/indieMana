@@ -1,26 +1,51 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateDeveloperDto } from './dto/create-developer.dto';
 import { UpdateDeveloperDto } from './dto/update-developer.dto';
+import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class DeveloperService {
-  create(createDeveloperDto: CreateDeveloperDto) {
-    return 'This action adds a new developer';
+  constructor(private prisma: PrismaService) {}
+  async create(createDeveloperDto: CreateDeveloperDto) {
+    return await this.prisma.developer.create({ data: createDeveloperDto });
   }
 
-  findAll() {
-    return `This action returns all developer`;
+  async findAll() {
+    return await this.prisma.developer.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} developer`;
+  async findOne(id: string) {
+    if (!id) {
+      throw new BadRequestException('id is required');
+    }
+
+    const developer = await this.prisma.developer.findUnique({ where: { id } });
+    if (!developer) {
+      throw new NotFoundException('Developer not found');
+    }
+    return developer;
   }
 
-  update(id: number, updateDeveloperDto: UpdateDeveloperDto) {
-    return `This action updates a #${id} developer`;
+  async update(id: string, updateDeveloperDto: UpdateDeveloperDto) {
+    const developer = await this.prisma.developer.findUnique({ where: { id } });
+    if (!developer) {
+      throw new NotFoundException('Developer not found');
+    }
+    return await this.prisma.developer.update({
+      where: { id },
+      data: updateDeveloperDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} developer`;
+  async remove(id: string) {
+    const developer = await this.prisma.developer.findUnique({ where: { id } });
+    if (!developer) {
+      throw new NotFoundException('Developer not found');
+    }
+    return await this.prisma.developer.delete({ where: { id } });
   }
 }

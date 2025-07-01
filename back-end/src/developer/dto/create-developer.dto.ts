@@ -23,7 +23,7 @@ export class CreateDeveloperDto {
   @Length(1, 255)
   @IsString()
   @IsNotEmpty()
-  email: string;
+  email?: string;
 
   @ApiProperty({
     type: String,
@@ -68,7 +68,7 @@ export class CreateDeveloperDto {
     example:
       "Motion Twin is a small game development studio based in France. Organized as a worker cooperative, with no hierarchy, we choose our projects, our objectives and our working structure together. We are trying to create the games we'd like to play, focusing on the player's experience.",
   })
-  @Length(1, 255)
+  @Length(1, 5000)
   @IsString()
   @IsNotEmpty()
   about?: string;
