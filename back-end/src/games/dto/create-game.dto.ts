@@ -1,14 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Category, Developer } from '@prisma/client';
 import {
   Length,
   IsString,
   IsNotEmpty,
   IsUrl,
   IsBoolean,
-  IsDate,
-  IsArray,
   IsDateString,
+  IsArray,
 } from 'class-validator';
 
 export class CreateGameDto {
@@ -90,7 +88,7 @@ export class CreateGameDto {
   @Length(3, 255)
   @IsString()
   @IsUrl()
-  steamUrl?: false;
+  steamUrl?: string;
 
   @ApiProperty({
     type: String,
@@ -114,18 +112,7 @@ export class CreateGameDto {
   @Length(3, 255)
   @IsString()
   @IsUrl()
-  discordUrl?: string;
-
-  @ApiProperty({
-    type: String,
-    required: false,
-    description: 'The twitter url of the game',
-    example: 'https://x.com/motiontwin',
-  })
-  @Length(3, 255)
-  @IsString()
-  @IsUrl()
-  twitterUrl?: string;
+  discord?: string;
 
   @ApiProperty({
     type: String,
@@ -159,12 +146,22 @@ export class CreateGameDto {
   dateRelease: Date;
 
   @ApiProperty({
-    type: [Number],
+    type: 'array',
     required: true,
     description: 'The categories of the game',
-    example: [1, 2, 3],
+    example: [{ id: 1 }],
   })
   @IsNotEmpty()
   @IsArray()
-  categories: [categortID: number];
+  categories: { id: number }[];
+
+  @ApiProperty({
+    type: 'array',
+    required: true,
+    description: 'The developers of the game',
+    example: [{ id: '' }],
+  })
+  @IsNotEmpty()
+  @IsArray()
+  developers: { id: string }[];
 }

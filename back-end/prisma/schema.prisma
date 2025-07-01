@@ -14,13 +14,13 @@ datasource db {
 }
 
 model Developer {
-  id        String @id @default(uuid())
+  id        String  @id @default(uuid())
   name      String
-  email     String
-  website   String
-  twitter   String
-  instagram String
-  about     String
+  email     String?
+  website   String?
+  twitter   String?
+  instagram String?
+  about     String?
 
   games Game[]
 
@@ -34,18 +34,18 @@ model Game {
   id            Int      @id @default(autoincrement())
   name          String
   description   String
-  xboxUrl       String
-  googlePlayUrl String
-  psnUrl        String
-  nintendoUrl   String
-  steamUrl      String
+  xboxUrl       String?
+  googlePlayUrl String?
+  psnUrl        String?
+  nintendoUrl   String?
+  steamUrl      String?
   bannerUrl     String
-  discord       String
+  discord       String?
   dateRelease   DateTime
-  trailerUrl    String
+  trailerUrl    String?
   achivents     Boolean
 
-  Categorys  Category[]
+  categories Category[]
   developers Developer[]
 
   createdAt DateTime @default(now())
