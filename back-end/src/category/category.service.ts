@@ -22,7 +22,10 @@ export class CategoryService {
       throw new BadRequestException('id is required');
     }
 
-    const category = await this.prisma.category.findUnique({ where: { id } });
+    const category = await this.prisma.category.findUnique({
+      where: { id },
+      include: { games: true },
+    });
     if (!category) {
       throw new NotFoundException('Category not found');
     }

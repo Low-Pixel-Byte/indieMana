@@ -23,7 +23,10 @@ export class DeveloperService {
       throw new BadRequestException('id is required');
     }
 
-    const developer = await this.prisma.developer.findUnique({ where: { id } });
+    const developer = await this.prisma.developer.findUnique({
+      where: { id },
+      include: { games: true },
+    });
     if (!developer) {
       throw new NotFoundException('Developer not found');
     }
