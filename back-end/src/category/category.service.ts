@@ -45,6 +45,9 @@ export class CategoryService {
   }
 
   async remove(id: number) {
+    if (!id) {
+      throw new BadRequestException('id is required');
+    }
     return await this.prisma.category.delete({ where: { id } });
   }
 }
