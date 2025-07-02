@@ -13,6 +13,10 @@ export class CategoryService {
     return await this.prisma.category.create({ data: createCategoryDto });
   }
 
+  async verifyName(name: string) {
+    return await this.prisma.category.findUnique({ where: { name } });
+  }
+
   async findAll() {
     return await this.prisma.category.findMany();
   }
