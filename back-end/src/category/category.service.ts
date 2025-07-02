@@ -13,8 +13,15 @@ export class CategoryService {
     return await this.prisma.category.create({ data: createCategoryDto });
   }
 
-  async verifyName(name: string) {
-    return await this.prisma.category.findUnique({ where: { name } });
+  async verifyNameExists(name: string) {
+    if (!name) {
+      throw new BadRequestException('name is required');
+    }
+
+    const category = await this.prisma.category.findUnique({ where: { name } });
+    if (category) {
+      throw new BadRequestException('Category name already exists');
+    }
   }
 
   async findAll() {
