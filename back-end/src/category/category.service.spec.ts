@@ -1,7 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CategoryService } from './category.service';
 import { PrismaService } from '../prisma.service';
-import { BadRequestException, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  NotFoundException,
+} from '@nestjs/common';
 import { randomInt } from 'crypto';
 
 describe('CategoryService', () => {
@@ -94,5 +98,25 @@ describe('CategoryService', () => {
     prismaService.category.findUnique = jest.fn().mockResolvedValueOnce(null);
 
     await expect(categoryService.remove(id)).rejects.toThrow(NotFoundException);
+  });
+
+  it('should BadRequestException VerifyNameExists when name is null', async () => {
+    const name = '';
+
+    await expect(categoryService.verifyNameExists(name)).rejects.toThrow(
+      BadRequestException,
+    );
+  });
+
+  it('should VerifyNameExists when name exists', async () => {
+    const name = 'Indie';
+
+    prismaService.category.findUnique = jest.fn().mockResolvedValueOnce({
+      name,
+    });
+
+    await expect(categoryService.verifyNameExists(name)).rejects.toThrow(
+      ConflictException,
+    );
   });
 });
