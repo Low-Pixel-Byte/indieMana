@@ -37,7 +37,10 @@ export class GamesService {
       throw new BadRequestException('id is required');
     }
 
-    const game = await this.prisma.game.findUnique({ where: { id } });
+    const game = await this.prisma.game.findUnique({
+      where: { id },
+      include: { developers: true, categories: true },
+    });
     if (!game) {
       throw new NotFoundException('Game not found');
     }
