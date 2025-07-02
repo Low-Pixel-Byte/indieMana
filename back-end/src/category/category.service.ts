@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
+  ConflictException,
 } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -20,7 +21,7 @@ export class CategoryService {
 
     const category = await this.prisma.category.findUnique({ where: { name } });
     if (category) {
-      throw new BadRequestException('Category name already exists');
+      throw new ConflictException('Category name already exists');
     }
   }
 
