@@ -48,6 +48,12 @@ export class CategoryService {
     if (!id) {
       throw new BadRequestException('id is required');
     }
+
+    const category = await this.prisma.category.findUnique({ where: { id } });
+    if (!category) {
+      throw new NotFoundException('Category not found');
+    }
+
     return await this.prisma.category.delete({ where: { id } });
   }
 }
