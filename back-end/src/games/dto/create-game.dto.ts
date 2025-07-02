@@ -139,7 +139,7 @@ export class CreateGameDto {
     type: Date,
     required: true,
     description: 'The release date of the game',
-    example: '2023-01-01',
+    example: '2023-01-01T00:00:00.000Z',
   })
   @IsNotEmpty()
   @IsDateString()

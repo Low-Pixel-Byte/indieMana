@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
 import { PrismaService } from 'src/prisma.service';
@@ -9,7 +13,7 @@ export class GamesService {
   async create(createGameDto: CreateGameDto) {
     const { developers, categories, ...rest } = createGameDto;
 
-    return this.prisma.game.create({
+    const game = await this.prisma.game.create({
       data: {
         ...rest,
         developers: {
@@ -20,21 +24,49 @@ export class GamesService {
         },
       },
     });
+
+    return game;
   }
 
-  findAll() {
-    return `This action returns all games`;
+  async findAll() {
+    return await this.prisma.game.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} game`;
+  async findOne(id: number) {
+    if (!id) {
+      throw new BadRequestException('id is required');
+    }
+
+    const game = await this.prisma.game.findUnique({ where: { id } });
+    if (!game) {
+      throw new NotFoundException('Game not found');
+    }
+
+    return game;
   }
 
-  update(id: number, updateGameDto: UpdateGameDto) {
-    return `This action updates a #${id} game`;
+  async update(id: number, updateGameDto: UpdateGameDto) {
+    const { developers, categories, ...rest } = updateGameDto;
+
+    return await this.prisma.game.update({
+      where: { id },
+      data: {
+        ...rest,
+        developers: {
+          connect: developers?.map((dev) => ({ id: dev.id })),
+        },
+        categories: {
+          connect: categories?.map((cat) => ({ id: cat.id })),
+        },
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} game`;
+  async remove(id: number) {
+    const game = await this.prisma.game.findUnique({ where: { id } });
+    if (!game) {
+      throw new NotFoundException('Game not found');
+    }
+    return await this.prisma.game.delete({ where: { id } });
   }
 }
