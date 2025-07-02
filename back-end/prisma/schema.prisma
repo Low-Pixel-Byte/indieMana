@@ -56,7 +56,7 @@ model Game {
 
 model Category {
   id    Int    @id @default(autoincrement())
-  name  String
+  name  String @unique
   games Game[]
 
   createdAt DateTime @default(now())
