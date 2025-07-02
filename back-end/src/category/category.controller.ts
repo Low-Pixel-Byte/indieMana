@@ -8,6 +8,7 @@ import {
   Delete,
   HttpCode,
   HttpStatus,
+  BadRequestException,
 } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -21,7 +22,11 @@ export class CategoryController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @ApiBody({ type: CreateCategoryDto })
-  create(@Body() createCategoryDto: CreateCategoryDto) {
+  async create(@Body() createCategoryDto: CreateCategoryDto) {
+    if (!createCategoryDto.name) {
+      throw new BadRequestException('Category name is null');
+    }
+
     return this.categoryService.create(createCategoryDto);
   }
 
