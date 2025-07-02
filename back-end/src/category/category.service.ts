@@ -34,10 +34,15 @@ export class CategoryService {
   }
 
   async update(id: number, updateCategoryDto: UpdateCategoryDto) {
+    if (!id) {
+      throw new BadRequestException('id is required');
+    }
+
     const category = await this.prisma.category.findUnique({ where: { id } });
     if (!category) {
       throw new NotFoundException('Category not found');
     }
+
     return await this.prisma.category.update({
       where: { id },
       data: updateCategoryDto,
