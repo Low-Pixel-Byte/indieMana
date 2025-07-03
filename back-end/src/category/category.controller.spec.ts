@@ -103,4 +103,48 @@ describe('CategoryController', () => {
       NotFoundException,
     );
   });
+
+  it('should update category', async () => {
+    const id = randomInt(1, 100);
+
+    prismaService.category.findUnique = jest.fn().mockResolvedValueOnce({
+      id,
+    });
+
+    const updateCategoryDto: CreateCategoryDto = {
+      name: 'Indie',
+    };
+
+    categoryService.update = jest.fn().mockResolvedValueOnce(updateCategoryDto);
+
+    const result = await controller.update(id.toString(), updateCategoryDto);
+
+    expect(result).toBeDefined();
+  });
+
+  it('should throw BadRequestException update when id is null', async () => {
+    const id = '';
+
+    const updateCategoryDto: CreateCategoryDto = {
+      name: 'Indie',
+    };
+
+    await expect(controller.update(id, updateCategoryDto)).rejects.toThrow(
+      BadRequestException,
+    );
+  });
+
+  it('should throw NotFoundException update when id is null', async () => {
+    const id = randomInt(1, 100);
+
+    const updateCategoryDto: CreateCategoryDto = {
+      name: 'Indie',
+    };
+
+    prismaService.category.findUnique = jest.fn().mockResolvedValueOnce(null);
+
+    await expect(
+      controller.update(id.toString(), updateCategoryDto),
+    ).rejects.toThrow(NotFoundException);
+  });
 });
