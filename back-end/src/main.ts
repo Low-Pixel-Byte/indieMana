@@ -19,11 +19,12 @@ async function bootstrap(): Promise<void> {
       new FastifyAdapter(),
     );
 
-  await app.register(fastifyCors, {
+  /* await app.register(fastifyCors, {
+    // NOT RECOMMENDED
     origin: '*',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  });
+  }); */
 
   // Configuration Swagger
   const configSwagger: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
