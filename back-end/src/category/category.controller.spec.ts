@@ -147,4 +147,34 @@ describe('CategoryController', () => {
       controller.update(id.toString(), updateCategoryDto),
     ).rejects.toThrow(NotFoundException);
   });
+
+  it('should remove category', async () => {
+    const id = randomInt(1, 100);
+
+    prismaService.category.findUnique = jest.fn().mockResolvedValueOnce({
+      id,
+    });
+
+    categoryService.remove = jest.fn().mockResolvedValueOnce(null);
+
+    const result = await controller.remove(id.toString());
+
+    expect(result).toBeDefined();
+  });
+
+  it('should throw BadRequestException remove when id is null', async () => {
+    const id = '';
+
+    await expect(controller.remove(id)).rejects.toThrow(BadRequestException);
+  });
+
+  it('should throw NotFoundException remove when id is null', async () => {
+    const id = randomInt(1, 100);
+
+    prismaService.category.findUnique = jest.fn().mockResolvedValueOnce(null);
+
+    await expect(controller.remove(id.toString())).rejects.toThrow(
+      NotFoundException,
+    );
+  });
 });
