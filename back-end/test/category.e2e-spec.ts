@@ -103,4 +103,24 @@ describe('CategoryController (e2e)', () => {
       .send(updateCategoryDto)
       .expect(404);
   });
+
+  it('/category/:id (DELETE) should delete category', async () => {
+    const categories = await categoryService.findAll();
+
+    return request(app.getHttpServer())
+      .delete(`/category/${categories[0].id}`)
+      .expect(204);
+  });
+
+  it('/category/:id (DELETE) should return BadRequestException', async () => {
+    const id = '';
+
+    return request(app.getHttpServer()).delete(`/category/${+id}`).expect(400);
+  });
+
+  it('/category/:id (DELETE) should return NotFoundException', async () => {
+    const id = randomInt(1000, 10000);
+
+    return request(app.getHttpServer()).delete(`/category/${+id}`).expect(404);
+  });
 });
