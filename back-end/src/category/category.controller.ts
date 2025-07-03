@@ -27,6 +27,8 @@ export class CategoryController {
       throw new BadRequestException('Category name is null');
     }
 
+    await this.categoryService.verifyNameExists(createCategoryDto.name);
+
     return this.categoryService.create(createCategoryDto);
   }
 
