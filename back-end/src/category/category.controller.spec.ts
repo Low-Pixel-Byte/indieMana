@@ -4,7 +4,7 @@ import { randomInt } from 'crypto';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { CategoryService } from './category.service';
 import { PrismaService } from '../prisma.service';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, ConflictException } from '@nestjs/common';
 
 describe('CategoryController', () => {
   let controller: CategoryController;
@@ -31,6 +31,8 @@ describe('CategoryController', () => {
       name: 'Indie',
     };
 
+    prismaService.category.findUnique = jest.fn().mockResolvedValueOnce(null);
+
     categoryService.create = jest.fn().mockResolvedValueOnce(createCategoryDto);
 
     const result = await controller.create(createCategoryDto);
@@ -48,9 +50,17 @@ describe('CategoryController', () => {
     );
   });
 
-  it('should badRequestException when id is null', async () => {
-    const id = '';
+  it('should throw ConflictException when category name already exists', async () => {
+    const createCategoryDto: CreateCategoryDto = {
+      name: 'Indie',
+    };
 
-    await expect(controller.findOne(id)).rejects.toThrow(BadRequestException);
+    prismaService.category.findUnique = jest.fn().mockResolvedValueOnce({
+      name: 'Indie',
+    });
+
+    await expect(controller.create(createCategoryDto)).rejects.toThrow(
+      ConflictException,
+    );
   });
 });
