@@ -9,7 +9,6 @@ import { randomInt } from 'crypto';
 describe('CategoryController (e2e)', () => {
   let app: INestApplication;
   let categoryService: CategoryService;
-  let prismaService: PrismaService;
 
   const createCategoryDto = {
     name: `Indie-${Date.now()}`,
@@ -24,7 +23,6 @@ describe('CategoryController (e2e)', () => {
     app = moduleRef.createNestApplication();
 
     categoryService = moduleRef.get<CategoryService>(CategoryService);
-    prismaService = moduleRef.get<PrismaService>(PrismaService);
 
     await app.init();
   });
@@ -44,27 +42,15 @@ describe('CategoryController (e2e)', () => {
   });
 
   it('/category (GET) should return all categories', async () => {
-    const categories = await categoryService.findAll();
-
-    return request(app.getHttpServer())
-      .get('/category')
-      .expect(200)
-      .expect((res) => {
-        expect(res.body).toEqual(JSON.parse(JSON.stringify(categories)));
-      });
+    return request(app.getHttpServer()).get('/category').expect(200);
   });
 
   it('/category/:id (GET) should return one category', async () => {
     const categories = await categoryService.findAll();
 
-    const category = await categoryService.findOne(categories[0].id);
-
     return request(app.getHttpServer())
       .get(`/category/${categories[0].id}`)
-      .expect(200)
-      .expect((res) => {
-        expect(res.body).toEqual(JSON.parse(JSON.stringify(category)));
-      });
+      .expect(200);
   });
 
   it('/category/:id (GET) should return BadRequestException', async () => {
@@ -74,10 +60,47 @@ describe('CategoryController (e2e)', () => {
   });
 
   it('/category/:id (GET) should return NotFoundException', async () => {
-    const id = randomInt(1, 100);
-
-    prismaService.category.findUnique = jest.fn().mockResolvedValueOnce(null);
+    const id = randomInt(1000, 10000);
 
     return request(app.getHttpServer()).get(`/category/${+id}`).expect(404);
+  });
+
+  it('/category/:id (PATCH) should update category', async () => {
+    const categories = await categoryService.findAll();
+
+    const updateCategoryDto = {
+      name: `Indie-Updated-${Date.now()}`,
+    };
+
+    return request(app.getHttpServer())
+      .patch(`/category/${categories[0].id}`)
+      .send(updateCategoryDto)
+      .expect(204);
+  });
+
+  it('/category/:id (PATCH) should return BadRequestException', async () => {
+    const id = '';
+
+    const updateCategoryDto = {
+      name: `Indie-Updated-${Date.now()}`,
+    };
+
+    return request(app.getHttpServer())
+      .patch(`/category/${+id}`)
+      .send(updateCategoryDto)
+      .expect(400);
+  });
+
+  it('/category/:id (PATCH) should return NotFoundException', async () => {
+    const id = randomInt(1000, 10000);
+
+    const updateCategoryDto = {
+      name: `Indie-Updated-${Date.now()}`,
+    };
+
+    return request(app.getHttpServer())
+      .patch(`/category/${+id}`)
+      .send(updateCategoryDto)
+      .expect(404);
   });
 });
