@@ -4,7 +4,11 @@ import { randomInt } from 'crypto';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { CategoryService } from './category.service';
 import { PrismaService } from '../prisma.service';
-import { BadRequestException, ConflictException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  NotFoundException,
+} from '@nestjs/common';
 
 describe('CategoryController', () => {
   let controller: CategoryController;
@@ -61,6 +65,42 @@ describe('CategoryController', () => {
 
     await expect(controller.create(createCategoryDto)).rejects.toThrow(
       ConflictException,
+    );
+  });
+
+  it('should return all categories', async () => {
+    prismaService.category.findMany = jest.fn().mockResolvedValueOnce([]);
+
+    const result = await controller.findAll();
+
+    expect(result).toEqual([]);
+  });
+
+  it('should return one category', async () => {
+    const id = randomInt(1, 100);
+
+    prismaService.category.findUnique = jest.fn().mockResolvedValueOnce({
+      id,
+    });
+
+    const result = await controller.findOne(id.toString());
+
+    expect(result).toBeDefined();
+  });
+
+  it('should throw BadRequestException when id is null', async () => {
+    const id = '';
+
+    await expect(controller.findOne(id)).rejects.toThrow(BadRequestException);
+  });
+
+  it('should throw NotFoundException when category not found', async () => {
+    const id = randomInt(1, 100);
+
+    prismaService.category.findUnique = jest.fn().mockResolvedValueOnce(null);
+
+    await expect(controller.findOne(id.toString())).rejects.toThrow(
+      NotFoundException,
     );
   });
 });
