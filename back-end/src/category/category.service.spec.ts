@@ -120,3 +120,40 @@ describe('CategoryService', () => {
     );
   });
 });
+
+describe('CategoryService Integration', () => {
+  let categoryService: CategoryService;
+  let prismaService: PrismaService;
+
+  const createCategoryDto = {
+    name: `Indie-${Date.now()}`,
+  };
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [CategoryService, PrismaService],
+    }).compile();
+
+    categoryService = module.get<CategoryService>(CategoryService);
+    prismaService = module.get<PrismaService>(PrismaService);
+  });
+
+  it('should be defined', () => {
+    expect(prismaService).toBeDefined();
+    expect(categoryService).toBeDefined();
+  });
+
+  it('should create category', async () => {
+    const category = await categoryService.create(createCategoryDto);
+
+    expect(category).toBeDefined();
+    expect(category.name).toBe(createCategoryDto.name);
+
+    const found = await prismaService.category.findUnique({
+      where: { id: category.id },
+    });
+
+    expect(found).not.toBeNull();
+    expect(found?.name).toBe(createCategoryDto.name);
+  });
+});
