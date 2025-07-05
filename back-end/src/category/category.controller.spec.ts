@@ -25,6 +25,7 @@ describe('CategoryController (Integration)', () => {
   });
 
   afterAll(async () => {
+    await prisma.$transaction([prisma.category.deleteMany()]);
     await prisma.$disconnect();
   });
 

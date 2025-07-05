@@ -21,6 +21,11 @@ describe('CategoryService', () => {
     prismaService = module.get<PrismaService>(PrismaService);
   });
 
+  afterAll(async () => {
+    await prismaService.$transaction([prismaService.category.deleteMany()]);
+    await prismaService.$disconnect();
+  });
+
   it('should be defined', () => {
     expect(prismaService).toBeDefined();
     expect(categoryService).toBeDefined();

@@ -13,6 +13,8 @@ describe('CategoryController (e2e)', () => {
   let app: NestFastifyApplication;
   let categoryService: CategoryService;
 
+  let prismaService: PrismaService;
+
   const createCategoryDto = {
     name: `Indie-${Date.now()}`,
   };
@@ -28,9 +30,15 @@ describe('CategoryController (e2e)', () => {
     );
 
     categoryService = moduleRef.get<CategoryService>(CategoryService);
+    prismaService = moduleRef.get<PrismaService>(PrismaService);
 
     await app.init();
     await app.getHttpAdapter().getInstance().ready();
+  });
+
+  afterAll(async () => {
+    await prismaService.$transaction([prismaService.category.deleteMany()]);
+    await prismaService.$disconnect();
   });
 
   it('/category (POST) should create category', async () => {
