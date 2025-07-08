@@ -38,6 +38,10 @@ export class DeveloperService {
   }
 
   async update(id: string, updateDeveloperDto: UpdateDeveloperDto) {
+    if (!id) {
+      throw new BadRequestException('id is required');
+    }
+
     const developer = await this.prisma.developer.findUnique({ where: { id } });
     if (!developer) {
       throw new NotFoundException('Developer not found');
