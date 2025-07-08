@@ -11,6 +11,10 @@ import { PrismaService } from '../prisma.service';
 export class DeveloperService {
   constructor(private prisma: PrismaService) {}
   async create(createDeveloperDto: CreateDeveloperDto) {
+    if (!createDeveloperDto.name) {
+      throw new BadRequestException('id is required');
+    }
+
     return await this.prisma.developer.create({ data: createDeveloperDto });
   }
 
