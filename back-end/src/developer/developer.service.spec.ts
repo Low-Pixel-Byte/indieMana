@@ -95,4 +95,22 @@ describe('CategoryService', () => {
       NotFoundException,
     );
   });
+
+  it('should badRequestException remove when id is null', async () => {
+    const id = '';
+
+    await expect(developerService.remove(id)).rejects.toThrow(
+      BadRequestException,
+    );
+  });
+
+  it('should NotFoundException remove when id is null', async () => {
+    const id = randomUUID();
+
+    prismaService.category.findUnique = jest.fn().mockResolvedValueOnce(null);
+
+    await expect(developerService.remove(id)).rejects.toThrow(
+      NotFoundException,
+    );
+  });
 });
