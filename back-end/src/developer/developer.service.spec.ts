@@ -75,4 +75,24 @@ describe('CategoryService', () => {
 
     expect(result).toEqual([]);
   });
+
+  it('should badRequestException update when id is null', async () => {
+    const id = '';
+
+    const mockdata = jest.fn().mockResolvedValueOnce(null);
+
+    await expect(developerService.update(id, mockdata)).rejects.toThrow(
+      BadRequestException,
+    );
+  });
+
+  it('should NotFoundException update when id is null', async () => {
+    const id = randomUUID();
+
+    const mockdata = jest.fn().mockResolvedValueOnce(null);
+
+    await expect(developerService.update(id, mockdata)).rejects.toThrow(
+      NotFoundException,
+    );
+  });
 });
