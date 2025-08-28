@@ -1,6 +1,9 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,13 +14,13 @@ datasource db {
 }
 
 model Developer {
-  id        String @id @default(uuid())
+  id        String  @id @default(uuid())
   name      String
-  email     String
-  website   String
-  twitter   String
-  instagram String
-  about     String
+  email     String?
+  website   String?
+  twitter   String?
+  instagram String?
+  about     String?
 
   games Game[]
 
@@ -31,18 +34,18 @@ model Game {
   id            Int      @id @default(autoincrement())
   name          String
   description   String
-  xboxUrl       String
-  googlePlayUrl String
-  psnUrl        String
-  nintendoUrl   String
-  steamUrl      String
+  xboxUrl       String?
+  googlePlayUrl String?
+  psnUrl        String?
+  nintendoUrl   String?
+  steamUrl      String?
   bannerUrl     String
-  discord       String
+  discord       String?
   dateRelease   DateTime
-  trailerUrl    String
+  trailerUrl    String?
   achivents     Boolean
 
-  Categorys  Category[]
+  categories Category[]
   developers Developer[]
 
   createdAt DateTime @default(now())
@@ -53,7 +56,7 @@ model Game {
 
 model Category {
   id    Int    @id @default(autoincrement())
-  name  String
+  name  String @unique
   games Game[]
 
   createdAt DateTime @default(now())
